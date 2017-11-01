@@ -23,49 +23,70 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="QEG-88-iTj"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ON9-uC-0BK">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ON9-uC-0BK">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserStoryCell" id="eA6-Kv-w1m" customClass="UserCollectionViewCell" customModule="InstaUserStoryApp" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="0.0" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPic.jpeg" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xo3-cp-fqy">
-                                                    <rect key="frame" x="2" y="2" width="96" height="96"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsU-hr-9Zv">
+                                                    <rect key="frame" x="15" y="0.0" width="70" height="70"/>
+                                                    <subviews>
+                                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPic.jpeg" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xo3-cp-fqy">
+                                                            <rect key="frame" x="2" y="2" width="66" height="66"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="33"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value=""/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="0.29367186918482402" blue="0.64207351699388104" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="ATl-U3-NnH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Xo3-cp-fqy" secondAttribute="trailing" constant="2" id="AVt-v4-J5a"/>
+                                                        <constraint firstAttribute="height" constant="70" id="WTW-nH-NsS"/>
+                                                        <constraint firstItem="Xo3-cp-fqy" firstAttribute="top" secondItem="bsU-hr-9Zv" secondAttribute="top" constant="2" id="kBl-SX-oba"/>
+                                                        <constraint firstItem="Xo3-cp-fqy" firstAttribute="leading" secondItem="bsU-hr-9Zv" secondAttribute="leading" constant="2" id="mKv-dN-ylr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Xo3-cp-fqy" secondAttribute="bottom" constant="2" id="uvM-6m-0FH"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="48"/>
+                                                            <integer key="value" value="35"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                            <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value=""/>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEg-bM-jku">
+                                                    <rect key="frame" x="0.0" y="79" width="100" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="0.1807242794388767" blue="0.51578932702651936" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Xo3-cp-fqy" secondAttribute="bottom" constant="2" id="EBQ-9G-WL4"/>
-                                            <constraint firstAttribute="trailing" secondItem="Xo3-cp-fqy" secondAttribute="trailing" constant="2" id="NVI-qZ-KDI"/>
-                                            <constraint firstItem="Xo3-cp-fqy" firstAttribute="top" secondItem="eA6-Kv-w1m" secondAttribute="top" constant="2" id="cL0-Rh-clJ"/>
-                                            <constraint firstItem="Xo3-cp-fqy" firstAttribute="leading" secondItem="eA6-Kv-w1m" secondAttribute="leading" constant="2" id="clp-SI-5zR"/>
+                                            <constraint firstAttribute="bottom" secondItem="DEg-bM-jku" secondAttribute="bottom" constant="4" id="5uv-AD-BEf"/>
+                                            <constraint firstItem="bsU-hr-9Zv" firstAttribute="top" secondItem="eA6-Kv-w1m" secondAttribute="top" id="Mn3-ki-c9E"/>
+                                            <constraint firstItem="bsU-hr-9Zv" firstAttribute="leading" secondItem="eA6-Kv-w1m" secondAttribute="leading" constant="15" id="STG-RN-3L3"/>
+                                            <constraint firstItem="DEg-bM-jku" firstAttribute="leading" secondItem="eA6-Kv-w1m" secondAttribute="leading" id="VNR-d5-f2F"/>
+                                            <constraint firstAttribute="trailing" secondItem="DEg-bM-jku" secondAttribute="trailing" id="qvm-FB-sCU"/>
+                                            <constraint firstAttribute="trailing" secondItem="bsU-hr-9Zv" secondAttribute="trailing" constant="15" id="swc-Kl-Ufu"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="50"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="UserNameLabel" destination="DEg-bM-jku" id="bcH-8Z-8Te"/>
                                             <outlet property="profileImageView" destination="Xo3-cp-fqy" id="NlQ-mK-vD7"/>
-                                            <segue destination="OyD-az-Pic" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="UMI-A2-9LD"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -95,7 +116,7 @@
         <!--Story View Controller-->
         <scene sceneID="Fl1-2C-dHj">
             <objects>
-                <viewController modalTransitionStyle="partialCurl" id="OyD-az-Pic" customClass="StoryViewController" customModule="InstaUserStoryApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StoryViewController" modalTransitionStyle="partialCurl" id="OyD-az-Pic" customClass="StoryViewController" customModule="InstaUserStoryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0gP-dF-m1r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

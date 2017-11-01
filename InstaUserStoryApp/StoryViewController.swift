@@ -16,12 +16,13 @@ class StoryViewController: UIViewController {
     var count :Float = 0
     var selectedProgressView : UIProgressView?
     var assertIndex: Int = 0
+    var asserts: [UIImage]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.photoImageView.image = UIImage.init(named: "UserPic.jpeg")
+        self.photoImageView.image = self.asserts[0]
          timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector:(#selector(self.updateProgressBar)), userInfo: nil, repeats: true)
-      self.ProgressBarArray =   self.createProgressBarsForAssets(assets: 7)
+      self.ProgressBarArray =   self.createProgressBarsForAssets(assets: asserts.count)
         selectedProgressView = self.ProgressBarArray[assertIndex]
 
         // Do any additional setup after loading the view.
@@ -36,20 +37,28 @@ class StoryViewController: UIViewController {
     }
    @objc func updateProgressBar(){
     UIView.animate(withDuration: 0.01) {
-        self.selectedProgressView?.setProgress(self.count/1000, animated: true)
+        self.selectedProgressView?.setProgress(self.count/500, animated: true)
     }
     count = count + 1
-    if count == 1000 {
+    if count == 500 {
         self.updateNextAsset()
     }
     }
     
     @objc func updateNextAsset() -> Void {
         assertIndex = assertIndex + 1
-        self.photoImageView.image = UIImage.init(named: "SecondPic.jpeg")
+        if assertIndex != asserts.count{
+        self.photoImageView.image = asserts[assertIndex]
         self.selectedProgressView = self.ProgressBarArray[assertIndex]
         count = 0
     }
+        else{
+            self.dismissViewController()
+            
+        }
+    }
+    
+    
     
     func dismissViewController() -> Void {
         self.dismiss(animated: true, completion: nil)
