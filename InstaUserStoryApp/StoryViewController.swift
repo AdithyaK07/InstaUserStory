@@ -11,14 +11,19 @@ import UIKit
 class StoryViewController: UIViewController {
 
     @IBOutlet weak var photoImageView: UIImageView!
+    var ProgressBarArray = [UIProgressView]()
     var timer = Timer()
-    var count = 0
+    var count :Float = 0
+    var selectedProgressView : UIProgressView?
+    var assertIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.photoImageView.image = UIImage.init(named: "UserPic.jpeg")
-         timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector:(#selector(self.updateNextAsset)), userInfo: nil, repeats: true)
-        
+         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector:(#selector(self.updateProgressBar)), userInfo: nil, repeats: true)
+      self.ProgressBarArray =   self.createProgressBarsForAssets(assets: 7)
+        selectedProgressView = self.ProgressBarArray[assertIndex]
+
         // Do any additional setup after loading the view.
     }
 
@@ -26,26 +31,53 @@ class StoryViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     @IBAction func tappedCloseButton(_ sender: UIButton) {
         self.dismissViewController()
     }
-    
+   @objc func updateProgressBar(){
+    UIView.animate(withDuration: 0.01) {
+        self.selectedProgressView?.setProgress(self.count/1000, animated: true)
+    }
+    count = count + 1
+    if count == 1000 {
+        self.updateNextAsset()
+    }
+    }
     
     @objc func updateNextAsset() -> Void {
-        if count == 1{
-            timer.invalidate()
-            self.dismissViewController()
-        }
+        assertIndex = assertIndex + 1
         self.photoImageView.image = UIImage.init(named: "SecondPic.jpeg")
-        count = count+1
-        
+        self.selectedProgressView = self.ProgressBarArray[assertIndex]
+        count = 0
     }
     
     func dismissViewController() -> Void {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
+    func createProgressBarsForAssets(assets:Int) -> [UIProgressView] {
+        let viewWidth = self.view.frame.width
+        let widthForProgressView = viewWidth - 20
+        let spaceBtwnBars = 3
+        let totalAvailableSpace = Float(widthForProgressView) - Float((assets-1)*3)
+        for i in 0 ..< assets{
+         let barWidth = CGFloat(totalAvailableSpace/Float(assets))
+        let x = 10 + CGFloat(spaceBtwnBars*i)+CGFloat(barWidth*CGFloat(i))
+         let progressView = self.createProgressView(x: x, width: barWidth)
+            self.ProgressBarArray.append(progressView)
+        }
+        return self.ProgressBarArray
+        
+        
+    }
+    
+    func createProgressView(x:CGFloat, width:CGFloat) -> UIProgressView{
+    let progressView = UIProgressView.init(frame: CGRect.init(x: x, y:20 , width: width, height: 2))
+        progressView.progressTintColor = UIColor.white
+        self.view.addSubview(progressView)
+        return progressView
+    
+    }
     
     
     /*
