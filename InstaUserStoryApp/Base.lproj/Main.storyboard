@@ -37,7 +37,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsU-hr-9Zv">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsU-hr-9Zv" userLabel="containerView">
                                                     <rect key="frame" x="15" y="0.0" width="70" height="70"/>
                                                     <subviews>
                                                         <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPic.jpeg" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xo3-cp-fqy">
@@ -53,7 +53,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="1" green="0.29367186918482402" blue="0.64207351699388104" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" red="0.97647058823529409" green="0.92941176470588238" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="ATl-U3-NnH"/>
                                                         <constraint firstAttribute="trailing" secondItem="Xo3-cp-fqy" secondAttribute="trailing" constant="2" id="AVt-v4-J5a"/>
@@ -86,6 +86,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="UserNameLabel" destination="DEg-bM-jku" id="bcH-8Z-8Te"/>
+                                            <outlet property="containerView" destination="bsU-hr-9Zv" id="fVK-cb-7vg"/>
                                             <outlet property="profileImageView" destination="Xo3-cp-fqy" id="NlQ-mK-vD7"/>
                                         </connections>
                                     </collectionViewCell>
@@ -111,7 +112,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-204" y="122"/>
+        </scene>
+        <!--Master View Controller-->
+        <scene sceneID="yuJ-Dw-A6f">
+            <objects>
+                <viewController storyboardIdentifier="masterVC" id="N2C-VM-gd6" customClass="MasterViewController" customModule="InstaUserStoryApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3ie-JT-dzX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="kdH-J8-HtY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61f-lj-4Uj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="503" y="114"/>
         </scene>
         <!--Story View Controller-->
         <scene sceneID="Fl1-2C-dHj">
@@ -124,10 +140,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-5m-JKp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caE-ph-VJj">
-                                <rect key="frame" x="313" y="20" width="44" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caE-ph-VJj">
+                                <rect key="frame" x="335" y="20" width="30" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="NQW-zG-QW2"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="nqc-mm-ah3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -138,20 +157,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="1WT-CD-4En" firstAttribute="trailing" secondItem="caE-ph-VJj" secondAttribute="trailing" constant="10" id="3qh-Do-93A"/>
+                            <constraint firstItem="caE-ph-VJj" firstAttribute="top" secondItem="1WT-CD-4En" secondAttribute="top" id="Olq-yu-blK"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="leading" secondItem="1WT-CD-4En" secondAttribute="leading" id="VKd-0r-rCV"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="top" secondItem="0gP-dF-m1r" secondAttribute="top" id="cgV-yr-eww"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="trailing" secondItem="1WT-CD-4En" secondAttribute="trailing" id="dYY-VL-6hh"/>
+                            <constraint firstItem="1WT-CD-4En" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="caE-ph-VJj" secondAttribute="trailing" id="vD4-3N-LdD"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="bottom" secondItem="1WT-CD-4En" secondAttribute="bottom" id="ytq-aU-aHZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1WT-CD-4En"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="caE-ph-VJj" id="hZ1-fd-VhL"/>
                         <outlet property="photoImageView" destination="h8D-5m-JKp" id="LBt-fb-f6e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AQQ-PU-EZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1084" y="121.88905547226388"/>
+            <point key="canvasLocation" x="1250" y="122"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="v9t-ad-PNB">
@@ -169,7 +192,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9t3-CY-f83" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-468" y="126"/>
+            <point key="canvasLocation" x="-897" y="122"/>
         </scene>
     </scenes>
     <resources>
