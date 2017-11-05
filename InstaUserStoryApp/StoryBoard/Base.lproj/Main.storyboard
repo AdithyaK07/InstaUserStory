@@ -18,8 +18,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xsN-ey-hmZ">
-                                <rect key="frame" x="0.0" y="74" width="375" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="QEG-88-iTj"/>
                                 </constraints>
@@ -38,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsU-hr-9Zv" userLabel="containerView">
-                                                    <rect key="frame" x="15" y="0.0" width="70" height="70"/>
+                                                    <rect key="frame" x="15" y="6.5" width="70" height="70"/>
                                                     <subviews>
                                                         <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPic.jpeg" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xo3-cp-fqy">
                                                             <rect key="frame" x="2" y="2" width="66" height="66"/>
@@ -62,15 +62,10 @@
                                                         <constraint firstItem="Xo3-cp-fqy" firstAttribute="leading" secondItem="bsU-hr-9Zv" secondAttribute="leading" constant="2" id="mKv-dN-ylr"/>
                                                         <constraint firstAttribute="bottom" secondItem="Xo3-cp-fqy" secondAttribute="bottom" constant="2" id="uvM-6m-0FH"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="35"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEg-bM-jku">
-                                                    <rect key="frame" x="0.0" y="79" width="100" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="0.0" y="81.5" width="100" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -78,9 +73,9 @@
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="DEg-bM-jku" secondAttribute="bottom" constant="4" id="5uv-AD-BEf"/>
-                                            <constraint firstItem="bsU-hr-9Zv" firstAttribute="top" secondItem="eA6-Kv-w1m" secondAttribute="top" id="Mn3-ki-c9E"/>
                                             <constraint firstItem="bsU-hr-9Zv" firstAttribute="leading" secondItem="eA6-Kv-w1m" secondAttribute="leading" constant="15" id="STG-RN-3L3"/>
-                                            <constraint firstItem="DEg-bM-jku" firstAttribute="leading" secondItem="eA6-Kv-w1m" secondAttribute="leading" id="VNR-d5-f2F"/>
+                                            <constraint firstItem="DEg-bM-jku" firstAttribute="centerX" secondItem="bsU-hr-9Zv" secondAttribute="centerX" id="ZBm-pv-RKz"/>
+                                            <constraint firstItem="DEg-bM-jku" firstAttribute="top" secondItem="bsU-hr-9Zv" secondAttribute="bottom" constant="5" id="bg4-Ww-pOy"/>
                                             <constraint firstAttribute="trailing" secondItem="DEg-bM-jku" secondAttribute="trailing" id="qvm-FB-sCU"/>
                                             <constraint firstAttribute="trailing" secondItem="bsU-hr-9Zv" secondAttribute="trailing" constant="15" id="swc-Kl-Ufu"/>
                                         </constraints>
@@ -100,7 +95,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xsN-ey-hmZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EG2-jL-yGs"/>
-                            <constraint firstItem="xsN-ey-hmZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="hFs-N0-XB3"/>
+                            <constraint firstItem="xsN-ey-hmZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hFs-N0-XB3"/>
                             <constraint firstItem="xsN-ey-hmZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ih8-iN-Cyr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

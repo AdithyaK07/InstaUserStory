@@ -14,6 +14,7 @@ class StoryViewController: UIViewController {
 
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
+    
     var ProgressBarArray = [UIProgressView]()
     var timer = Timer()
     var count :Float = 0
@@ -26,23 +27,28 @@ class StoryViewController: UIViewController {
     var playerLayer : AVPlayerLayer?
     var progressContainerView : UIView?
 
+    //MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector:(#selector(triggeredBytimer)), userInfo: nil, repeats: true)
-        self.progressContainerView = UIView.init(frame: CGRect.init(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width, height: 100))
+        timer = Timer.scheduledTimer(timeInterval: 0.01,
+                                     target: self,
+                                     selector:(#selector(triggeredBytimer)),
+                                     userInfo: nil, repeats: true)
+        self.progressContainerView = UIView.init(frame: CGRect.init(x: self.view.frame.origin.x,
+                                                                    y: self.view.frame.origin.y,
+                                                                    width: self.view.frame.width,
+                                                                    height: 100))
         
-      self.ProgressBarArray =   self.createProgressBarsForAssets(assets: asserts.count)
+        self.ProgressBarArray =   self.createProgressBarsForAssets(assets: asserts.count)
         self.view.addSubview(self.progressContainerView!)
         selectedProgressView = self.ProgressBarArray[assertIndex]
-
-        // Do any additional setup after loading the view.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    //MARK: Action Methods
     @IBAction func tappedCloseButton(_ sender: UIButton) {
+        timer.invalidate()
+        player?.pause()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -64,62 +70,54 @@ class StoryViewController: UIViewController {
                 self.fetchAsset()
                 self.selectedProgressView = self.ProgressBarArray[assertIndex]
 
-                
             }
         }
         
     }
+    
+    
     func fetchAsset(){
         let assert = asserts[assertIndex]
         let fileName = URL.init(string: assert)?.deletingPathExtension().absoluteString
         let fileType = URL.init(string: assert)?.pathExtension
-      
+        
         let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,fileType! as CFString,nil)?.takeRetainedValue()
-
+        
         if UTTypeConformsTo(uti!, kUTTypeImage){
             print("this is image")
             count = 5
-        }
-        else if UTTypeConformsTo(uti!, kUTTypeMovie){
-            print("this is video")
-        }
-        if (fileType == "mp4"){
-            print("assert is video with name:\(assert)")
-            self.playVideo(name: fileName!, fileType: fileType!)
-        }
-        else{
-            print("assert is image with name: \(assert)")
             self.view.bringSubview(toFront: self.photoImageView)
             self.view.bringSubview(toFront: self.progressContainerView!)
             self.view.bringSubview(toFront: self.closeButton)
             self.photoImageView.image = UIImage.init(named: assert)
         }
+        else if UTTypeConformsTo(uti!, kUTTypeMovie){
+            print("this is video")
+            self.playVideo(name: fileName!, fileType: fileType!)
+        }
+//        if (fileType == "mp4"){
+//            print("assert is video with name:\(assert)")
+//            self.playVideo(name: fileName!, fileType: fileType!)
+//        }
+//        else{
+//            print("assert is image with name: \(assert)")
+//            self.view.bringSubview(toFront: self.photoImageView)
+//            self.view.bringSubview(toFront: self.progressContainerView!)
+//            self.view.bringSubview(toFront: self.closeButton)
+//            self.photoImageView.image = UIImage.init(named: assert)
+//        }
     }
     
     
     
-   @objc func updateProgressBar(){
-    UIView.animate(withDuration: 0.01) {
-        self.selectedProgressView?.setProgress((self.counter/(self.count*100)), animated: true)
-    }
-    }
-    
-    @objc func updateNextAsset() -> Void {
-        assertIndex = assertIndex + 1
-        if assertIndex != asserts.count{
-           // self.displayAssert()
-        count = 0
-    }
-        else{
-            self.dismissViewController()
+    func updateProgressBar(){
+        UIView.animate(withDuration: 0.01) {
+            self.selectedProgressView?.setProgress((self.counter/(self.count*100)), animated: true)
         }
     }
-    
-
 
     
     func playVideo(name:String, fileType:String){
-        
         let urlPath = Bundle.main.path(forResource: name, ofType: fileType)
         let videoURL = URL(fileURLWithPath: urlPath!)
         let asset = AVURLAsset(url: videoURL)
@@ -142,8 +140,6 @@ class StoryViewController: UIViewController {
         self.view.bringSubview(toFront: self.closeButton)
 
         player!.play()
-        
-
     }
     
     func createProgressBarsForAssets(assets:Int) -> [UIProgressView] {
@@ -168,20 +164,8 @@ class StoryViewController: UIViewController {
     }
     
     func dismissViewController() -> Void {
-     player?.pause()
-        
-        
+        player?.pause()
         let parentViewcontroller = self.parent as! MasterViewController
-    
         parentViewcontroller.finishedDisplayingViewController(oldVC: self)
-       // self.hideContentController(content: self)
-                //self.dismiss(animated: true, completion: nil)
     }
-    
-    func hideContentController(content:UIViewController) -> Void {
-        content.willMove(toParentViewController: nil)
-        content.view.removeFromSuperview()
-        content.removeFromParentViewController()
-    }
-
 }
