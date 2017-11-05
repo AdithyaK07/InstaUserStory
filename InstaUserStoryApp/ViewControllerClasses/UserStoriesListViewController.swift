@@ -58,7 +58,7 @@ class UserStoriesListViewController: UIViewController,UICollectionViewDelegate,U
         self.usersStoriesArray?.append(secondUser)
         let thirdUser = UserModelClass.init(name: "thirdUser", photo: UIImage.init(named: "thirdUser.jpeg"))
 //        thirdUser.statusAssets = [UIImage.init(named: "image9.jpg")!,UIImage.init(named: "image1.jpg")!,UIImage.init(named: "image5.jpeg")!,UIImage.init(named: "image8.jpeg")!]
-        thirdUser.statusAssets = ["image9.jpg","video6.mp4","image2.jpeg","video4.mp4","image4.jpeg"]
+        thirdUser.statusAssets = ["video6.mp4","image2.jpeg","video4.mp4","image4.jpeg"]
         self.usersStoriesArray?.append(thirdUser)
         let fourthUser = UserModelClass.init(name: "fourthUser", photo: UIImage.init(named: "fourthUser.jpeg"))
 //        fourthUser.statusAssets = [UIImage.init(named: "image9.jpg")!]

@@ -11,6 +11,8 @@ import AVKit
 import MobileCoreServices
 
 class StoryViewController: UIViewController {
+    
+    var reverse : Bool?
 
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
@@ -43,8 +45,30 @@ class StoryViewController: UIViewController {
         self.view.addSubview(self.progressContainerView!)
         selectedProgressView = self.ProgressBarArray[assertIndex]
         
+        
+        let swipeGuestureRight = UISwipeGestureRecognizer.init(target: self,
+                                                               action: #selector(handleSwipeGuesture(gesture:)))
+        swipeGuestureRight.direction = .right
+        self.view.addGestureRecognizer(swipeGuestureRight)
+        let swipeGuestureLeft = UISwipeGestureRecognizer.init(target: self,
+                                                              action:#selector(handleSwipeGuestureLeft(gesture:)))
+        swipeGuestureLeft.direction = .left
+        self.view.addGestureRecognizer(swipeGuestureLeft)
     }
-
+  @objc func handleSwipeGuesture(gesture:UISwipeGestureRecognizer){
+    
+    self.reverse = true
+    print("swipeDirection\(gesture.direction)")
+    self.dismissViewController()
+        
+        
+    }
+    @objc func handleSwipeGuestureLeft(gesture:UISwipeGestureRecognizer){
+        self.reverse = false
+       print("swipeDirction\(gesture.direction)")
+        self.dismissViewController()
+        
+    }
     //MARK: Action Methods
     @IBAction func tappedCloseButton(_ sender: UIButton) {
         timer.invalidate()
@@ -69,10 +93,8 @@ class StoryViewController: UIViewController {
                 playerLayer?.removeFromSuperlayer()
                 self.fetchAsset()
                 self.selectedProgressView = self.ProgressBarArray[assertIndex]
-
             }
         }
-        
     }
     
     
@@ -95,17 +117,6 @@ class StoryViewController: UIViewController {
             print("this is video")
             self.playVideo(name: fileName!, fileType: fileType!)
         }
-//        if (fileType == "mp4"){
-//            print("assert is video with name:\(assert)")
-//            self.playVideo(name: fileName!, fileType: fileType!)
-//        }
-//        else{
-//            print("assert is image with name: \(assert)")
-//            self.view.bringSubview(toFront: self.photoImageView)
-//            self.view.bringSubview(toFront: self.progressContainerView!)
-//            self.view.bringSubview(toFront: self.closeButton)
-//            self.photoImageView.image = UIImage.init(named: assert)
-//        }
     }
     
     
@@ -131,10 +142,10 @@ class StoryViewController: UIViewController {
         let assetItem = AVPlayerItem(asset: asset)
         player = AVPlayer(playerItem: assetItem)
         playerLayer = AVPlayerLayer(player: player)
+        playerLayer!.frame = self.photoImageView.frame
         
-        playerLayer!.frame = self.view.frame
         
-        playerLayer!.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        playerLayer!.videoGravity = AVLayerVideoGravity.resize
         self.view.layer.addSublayer(playerLayer!)
         self.view.bringSubview(toFront: self.progressContainerView!)
         self.view.bringSubview(toFront: self.closeButton)
@@ -165,7 +176,10 @@ class StoryViewController: UIViewController {
     
     func dismissViewController() -> Void {
         player?.pause()
+        timer.invalidate()
         let parentViewcontroller = self.parent as! MasterViewController
+        parentViewcontroller.reverse = self.reverse
         parentViewcontroller.finishedDisplayingViewController(oldVC: self)
     }
 }
+
