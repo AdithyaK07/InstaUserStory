@@ -84,7 +84,7 @@ class StoryViewController: UIViewController,stopPlayBack {
         if counter == self.count*100 {
             counter = 0
             assertIndex = assertIndex + 1
-            if assertIndex == asserts.count{
+            if (assertIndex >= asserts.count){
                 self.fetchNextUserStory()
             }
             else{
