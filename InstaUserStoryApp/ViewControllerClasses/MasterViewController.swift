@@ -8,11 +8,17 @@
 
 import UIKit
 
-class MasterViewController: UIViewController,UIViewControllerTransitioningDelegate {
+protocol stopPlayBack {
+    func stopPlayBack(stop:Bool)
+}
+
+class MasterViewController: UIViewController {
+    
     var usersArray : [UserModelClass]?
     var index      : Int?
-    var reverse  : Bool?
+    var reverse  : Bool = false
     var swipe : Bool = false
+    var playBackDelegate : stopPlayBack?
 
     @IBOutlet weak var containerView: UIView!
     //MARK:- View Life Cycle Methods
@@ -24,8 +30,8 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
     func  addChildViewController() -> Void {
         let newVC = self.createNewViewControllerInstance()
         self.addChildViewController(newVC)
-        self.view.addSubview(newVC.view)
-        newVC.view.frame = self.view.bounds
+        self.containerView.addSubview(newVC.view)
+        newVC.view.frame = self.containerView.bounds
         newVC.didMove(toParentViewController: self)
     }
     
@@ -36,18 +42,21 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
     }
     
     
-    func finishedDisplayingViewController(oldVC:UIViewController){
-        index = index! + 1
-        if let rev = reverse{
-            index = rev ? (index! - 2) : index!
-        }
+    func finishedDisplayingViewController(oldVC:StoryViewController){
+        
+        index = index! + (reverse ? -1 : 1)
+        
         if (index! <= usersArray!.count-1 && index! >= 0) {
+            self.playBackDelegate?.stopPlayBack(stop: true)
             let newVC = self.createNewViewControllerInstance()
-            newVC.transitioningDelegate = self
             self.switchBetweenViews(fromVC: oldVC, toVC: newVC)
         }
         else{
-            if reverse == nil{
+            if swipe{
+                self.playBackDelegate?.stopPlayBack(stop: !swipe)
+                index = index! + (reverse ? 1 : -1)
+            }
+            else{
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -61,10 +70,8 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
         let fromViewController = fromVC
         let toView = toViewController.view
         let fromView = fromViewController.view
-        var direction : CGFloat = 1
-        if let rev = reverse{
-         direction = rev ? -1 : 1
-        }
+        let direction : CGFloat = reverse ? -1 : 1
+
         let const: CGFloat = -0.005
         toView?.layer.anchorPoint = CGPoint(x: direction == 1 ? 0 : 1 , y: 0.5)
         fromView?.layer.anchorPoint = CGPoint(x: direction == 1 ? 1 : 0 , y: 0.5)
@@ -78,6 +85,9 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
         toView?.layer.transform = viewToTransform
         self.addChildViewController(toVC)
         containerView?.addSubview(toView!)
+        
+        let snapShotView = 
+        
 
         
         self.transition(from: fromVC, to: toVC, duration: 0.5, options:UIViewAnimationOptions.curveLinear, animations: {
@@ -95,4 +105,5 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
             toVC.didMove(toParentViewController: self)
         }
     }
+    
 }

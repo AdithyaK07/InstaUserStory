@@ -10,9 +10,11 @@ import UIKit
 import AVKit
 import MobileCoreServices
 
-class StoryViewController: UIViewController {
-    
-    var reverse : Bool?
+
+class StoryViewController: UIViewController,stopPlayBack {
+
+    var reverse : Bool = false
+    var swipe : Bool = false
 
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
@@ -24,6 +26,7 @@ class StoryViewController: UIViewController {
     var selectedProgressView : UIProgressView?
     var assertIndex: Int = 0
     var asserts: [String]!
+    
     
     var player : AVPlayer?
     var playerLayer : AVPlayerLayer?
@@ -49,37 +52,27 @@ class StoryViewController: UIViewController {
         
     }
 
-
-    func addSwipeGuestures() {
-        let swipeGuestureRight = UISwipeGestureRecognizer.init(target: self,
-                                                               action: #selector(handleSwipeGuesture(gesture:)))
-        swipeGuestureRight.direction = .right
-        self.view.addGestureRecognizer(swipeGuestureRight)
-        let swipeGuestureLeft = UISwipeGestureRecognizer.init(target: self,
-                                                              action:#selector(handleSwipeGuestureLeft(gesture:)))
-        swipeGuestureLeft.direction = .left
-        self.view.addGestureRecognizer(swipeGuestureLeft)
-    }
-    
-  @objc func handleSwipeGuesture(gesture:UISwipeGestureRecognizer){
-    
-    self.reverse = true
-    print("swipeDirection\(gesture.direction)")
-    self.dismissViewController()
-        
-        
-    }
-    @objc func handleSwipeGuestureLeft(gesture:UISwipeGestureRecognizer){
-        self.reverse = false
-       print("swipeDirction\(gesture.direction)")
-        self.dismissViewController()
-        
-    }
     //MARK: Action Methods
     @IBAction func tappedCloseButton(_ sender: UIButton) {
         timer.invalidate()
         player?.pause()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: Selector Methods
+    
+    @objc func handleSwipeGuesture(gesture:UISwipeGestureRecognizer){
+        self.reverse = true
+        self.swipe = true
+        print("swipeDirection\(gesture.direction)")
+        self.fetchNextUserStory()
+    }
+    
+    @objc func handleSwipeGuestureLeft(gesture:UISwipeGestureRecognizer){
+        self.reverse = false
+        self.swipe = true
+        print("swipeDirction\(gesture.direction)")
+        self.fetchNextUserStory()
     }
     
     @objc func triggeredBytimer(){
@@ -92,8 +85,7 @@ class StoryViewController: UIViewController {
             counter = 0
             assertIndex = assertIndex + 1
             if assertIndex == asserts.count{
-                timer.invalidate()
-                self.dismissViewController()
+                self.fetchNextUserStory()
             }
             else{
                 playerLayer?.removeFromSuperlayer()
@@ -102,7 +94,25 @@ class StoryViewController: UIViewController {
             }
         }
     }
+
     
+    //MARK:- Helper Methods
+    func addSwipeGuestures() {
+        let swipeGuestureRight = UISwipeGestureRecognizer.init(target: self,
+                                                               action: #selector(handleSwipeGuesture(gesture:)))
+        swipeGuestureRight.direction = .right
+        self.view.addGestureRecognizer(swipeGuestureRight)
+        let swipeGuestureLeft = UISwipeGestureRecognizer.init(target: self,
+                                                              action:#selector(handleSwipeGuestureLeft(gesture:)))
+        swipeGuestureLeft.direction = .left
+        self.view.addGestureRecognizer(swipeGuestureLeft)
+    }
+    
+    func updateProgressBar(){
+        UIView.animate(withDuration: 0.01) {
+            self.selectedProgressView?.setProgress((self.counter/(self.count*100)), animated: true)
+        }
+    }
     
     func fetchAsset(){
         let assert = asserts[assertIndex]
@@ -125,15 +135,7 @@ class StoryViewController: UIViewController {
         }
     }
     
-    
-    
-    func updateProgressBar(){
-        UIView.animate(withDuration: 0.01) {
-            self.selectedProgressView?.setProgress((self.counter/(self.count*100)), animated: true)
-        }
-    }
 
-    
     func playVideo(name:String, fileType:String){
         let urlPath = Bundle.main.path(forResource: name, ofType: fileType)
         let videoURL = URL(fileURLWithPath: urlPath!)
@@ -150,13 +152,20 @@ class StoryViewController: UIViewController {
         playerLayer = AVPlayerLayer(player: player)
         playerLayer!.frame = self.photoImageView.frame
         
-        
         playerLayer!.videoGravity = AVLayerVideoGravity.resize
         self.view.layer.addSublayer(playerLayer!)
         self.view.bringSubview(toFront: self.progressContainerView!)
         self.view.bringSubview(toFront: self.closeButton)
 
         player!.play()
+    }
+    
+    func fetchNextUserStory() -> Void {
+        let parentViewcontroller = self.parent as! MasterViewController
+        parentViewcontroller.playBackDelegate = self
+        parentViewcontroller.reverse = self.reverse
+        parentViewcontroller.swipe = self.swipe
+        parentViewcontroller.finishedDisplayingViewController(oldVC: self)
     }
     
     func createProgressBarsForAssets(assets:Int) -> [UIProgressView] {
@@ -180,12 +189,16 @@ class StoryViewController: UIViewController {
         return progressView
     }
     
-    func dismissViewController() -> Void {
-        player?.pause()
-        timer.invalidate()
-        let parentViewcontroller = self.parent as! MasterViewController
-        parentViewcontroller.reverse = self.reverse
-        parentViewcontroller.finishedDisplayingViewController(oldVC: self)
+    //MARK: - Delegate Methods
+    func stopPlayBack(stop:Bool) {
+        if stop {
+            player?.pause()
+            timer.invalidate()
+        }
+        else{
+            reverse = false
+            swipe = false
+        }
     }
 }
 
