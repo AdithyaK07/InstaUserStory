@@ -45,7 +45,12 @@ class StoryViewController: UIViewController {
         self.view.addSubview(self.progressContainerView!)
         selectedProgressView = self.ProgressBarArray[assertIndex]
         
+        self.addSwipeGuestures()
         
+    }
+
+
+    func addSwipeGuestures() {
         let swipeGuestureRight = UISwipeGestureRecognizer.init(target: self,
                                                                action: #selector(handleSwipeGuesture(gesture:)))
         swipeGuestureRight.direction = .right
@@ -55,6 +60,7 @@ class StoryViewController: UIViewController {
         swipeGuestureLeft.direction = .left
         self.view.addGestureRecognizer(swipeGuestureLeft)
     }
+    
   @objc func handleSwipeGuesture(gesture:UISwipeGestureRecognizer){
     
     self.reverse = true

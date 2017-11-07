@@ -14,6 +14,7 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
     var reverse  : Bool?
     var swipe : Bool = false
 
+    @IBOutlet weak var containerView: UIView!
     //MARK:- View Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +56,7 @@ class MasterViewController: UIViewController,UIViewControllerTransitioningDelega
 
     //MARK:- Animation Methods
     func switchBetweenViews(fromVC:UIViewController,toVC:UIViewController) {
-        let containerView = self.view
+        let containerView = self.containerView
         let toViewController = toVC
         let fromViewController = fromVC
         let toView = toViewController.view

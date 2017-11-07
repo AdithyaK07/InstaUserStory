@@ -116,13 +116,28 @@
                     <view key="view" contentMode="scaleToFill" id="3ie-JT-dzX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbT-Ve-z7n" userLabel="ContainerView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DbT-Ve-z7n" firstAttribute="leading" secondItem="kdH-J8-HtY" secondAttribute="leading" id="AxW-mD-htA"/>
+                            <constraint firstItem="DbT-Ve-z7n" firstAttribute="bottom" secondItem="kdH-J8-HtY" secondAttribute="bottom" id="SUT-um-3jY"/>
+                            <constraint firstItem="DbT-Ve-z7n" firstAttribute="trailing" secondItem="kdH-J8-HtY" secondAttribute="trailing" id="uYq-1b-PhQ"/>
+                            <constraint firstItem="DbT-Ve-z7n" firstAttribute="top" secondItem="3ie-JT-dzX" secondAttribute="top" id="xxO-fD-Ndo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kdH-J8-HtY"/>
                     </view>
+                    <connections>
+                        <outlet property="containerView" destination="DbT-Ve-z7n" id="1dF-J1-Inb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61f-lj-4Uj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="503" y="114"/>
+            <point key="canvasLocation" x="501.60000000000002" y="113.79310344827587"/>
         </scene>
         <!--Story View Controller-->
         <scene sceneID="Fl1-2C-dHj">
@@ -152,12 +167,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="caE-ph-VJj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0gP-dF-m1r" secondAttribute="leading" constant="20" symbolic="YES" id="1bx-fW-0th"/>
                             <constraint firstItem="1WT-CD-4En" firstAttribute="trailing" secondItem="caE-ph-VJj" secondAttribute="trailing" constant="10" id="3qh-Do-93A"/>
                             <constraint firstItem="caE-ph-VJj" firstAttribute="top" secondItem="1WT-CD-4En" secondAttribute="top" id="Olq-yu-blK"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="leading" secondItem="1WT-CD-4En" secondAttribute="leading" id="VKd-0r-rCV"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="top" secondItem="0gP-dF-m1r" secondAttribute="top" id="cgV-yr-eww"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="trailing" secondItem="1WT-CD-4En" secondAttribute="trailing" id="dYY-VL-6hh"/>
-                            <constraint firstItem="1WT-CD-4En" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="caE-ph-VJj" secondAttribute="trailing" id="vD4-3N-LdD"/>
                             <constraint firstItem="h8D-5m-JKp" firstAttribute="bottom" secondItem="1WT-CD-4En" secondAttribute="bottom" id="ytq-aU-aHZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1WT-CD-4En"/>
