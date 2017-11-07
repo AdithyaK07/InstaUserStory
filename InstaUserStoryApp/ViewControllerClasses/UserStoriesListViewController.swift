@@ -8,9 +8,10 @@
 
 import UIKit
 
-class UserStoriesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+class UserStoriesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
 
     @IBOutlet weak var userStoriesListView: UICollectionView!
+
     
     var usersStoriesArray: [UserModelClass]? = [UserModelClass]()
     
@@ -43,32 +44,24 @@ class UserStoriesListViewController: UIViewController,UICollectionViewDelegate,U
         storyMasterVC.usersArray = self.usersStoriesArray
         storyMasterVC.index = indexPath.item
         self.present(storyMasterVC, animated: true, completion: nil)
+ 
     }
 
     //MARK:- Helper Methods
     func createUsersWithAssets() {
-        
-       let firstUser = UserModelClass.init(name: "firstUser", photo: UIImage.init(named: "firstUser.jpeg"))
-//        firstUser.statusAssets = [UIImage.init(named: "image1.jpg")!,UIImage.init(named: "image2.jpeg")!,UIImage.init(named: "image3.jpeg")!]
-        firstUser.statusAssets = ["image1.jpg"]
+        let firstUser = UserModelClass.init(name: "firstUser", photo: UIImage.init(named: "firstUser.jpeg"))
+        firstUser.statusAssets = ["image1.jpg","image5.jpeg"]
         self.usersStoriesArray?.append(firstUser)
         let secondUser = UserModelClass.init(name: "secondUser", photo: UIImage.init(named: "secondUser.jpeg"))
-//        secondUser.statusAssets = [UIImage.init(named: "image4.jpeg")!,UIImage.init(named: "image5.jpeg")!,UIImage.init(named: "image6.jpeg")!,UIImage.init(named: "image7.jpeg")!,UIImage.init(named: "image8.jpeg")!]
         secondUser.statusAssets = ["image4.jpeg","image5.jpeg","video1.mp4","video2.mp4","image6.jpeg"]
         self.usersStoriesArray?.append(secondUser)
         let thirdUser = UserModelClass.init(name: "thirdUser", photo: UIImage.init(named: "thirdUser.jpeg"))
-//        thirdUser.statusAssets = [UIImage.init(named: "image9.jpg")!,UIImage.init(named: "image1.jpg")!,UIImage.init(named: "image5.jpeg")!,UIImage.init(named: "image8.jpeg")!]
         thirdUser.statusAssets = ["video6.mp4","image2.jpeg","video4.mp4","image4.jpeg"]
         self.usersStoriesArray?.append(thirdUser)
         let fourthUser = UserModelClass.init(name: "fourthUser", photo: UIImage.init(named: "fourthUser.jpeg"))
-//        fourthUser.statusAssets = [UIImage.init(named: "image9.jpg")!]
         fourthUser.statusAssets = ["video4.mp4","video10.mp4","video7.mp4"]
         self.usersStoriesArray?.append(fourthUser)
-    
+        
     }
 }
 
-
-
-//        let storyViewcontroller = self.storyboard?.instantiateViewController(withIdentifier: "StoryViewController") as! StoryViewController
-//        storyViewcontroller.asserts = self.usersStoriesArray![indexPath.item].statusAssets as! [String]
